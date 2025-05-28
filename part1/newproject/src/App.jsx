@@ -11,11 +11,11 @@ const Content = (details) => {
   console.log(details)
   return (
     <div>
-        <p>{details.part1} {details.exercises1}</p>
+        <p>{details.parts[0].name} {details.parts[0].exercises}</p>
 
-        <p>{details.part2} {details.exercises2}</p>
+        <p>{details.parts[1].name} {details.parts[1].exercises}</p>
 
-        <p>{details.part3} {details.exercises3}</p>
+        <p>{details.parts[2].name} {details.parts[2].exercises}</p>
 
     </div>
   )
@@ -26,7 +26,7 @@ const Total = (totalexercises) => {
   return (
     <div>
       <p>
-        {totalexercises.countPart1 + totalexercises.countPart2  + totalexercises.countPart3}
+        {totalexercises.parts[0].exercises + totalexercises.parts[1].exercises  + totalexercises.parts[2].exercises}
       </p>
     </div>
   )
@@ -52,8 +52,8 @@ const App = () => {
   return (
     <div>
       <Header name={course} />
-      <Content part1={parts[0].name} exercises1={parts[0].exercises} part2={parts[1].name} exercises2={parts[1].exercises} part3={parts[2].name} exercises3={parts[2].exercises} />
-      <Total countPart1={parts[0].exercises} countPart2={parts[1].exercises} countPart3={parts[2].exercises}/>
+      <Content parts={parts} />
+      <Total parts={parts}/>
     </div>
   )
 }
