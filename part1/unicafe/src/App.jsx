@@ -31,6 +31,11 @@ const App = () => {
   setBad(badValue + 1)
   }
 
+  let totalValue = good+neutral+bad
+  let averageValue = ((good*1) + (neutral*0) + (bad*-1)) / totalValue
+  let positivePerc = (good * 100) / totalValue
+
+
   return (
     <div>
       <h1>Give Feedback</h1>
@@ -39,6 +44,9 @@ const App = () => {
       <Display value={`Good: ${good}`}></Display>
       <Display value={`Neutral: ${neutral}`}></Display>
       <Display value={`Bad: ${bad}`}></Display>
+      <Display value={`Total: ${totalValue}`}></Display>
+      <Display value={`Average: ${averageValue = averageValue || 0}`}></Display>
+      <Display value={`Positive: ${positivePerc = positivePerc || 0} %`}></Display>
 
     </div>
   )
