@@ -12,12 +12,21 @@ const StatisticLine = (props) => {
     if (props.text === "Positive"){
       return(
 
-    <div>{props.text} : {props.value} % </div>
+    
+      <tr>
+        <td>{props.text} </td> 
+        <td>{props.value} % </td>
+      </tr>
+  
       )
 
     };
     return (
-    <div>{props.text} : {props.value}</div>)
+      <tr>
+        <td>{props.text} </td> 
+        <td>{props.value}</td>
+      </tr>
+    )
 }
 
 const Statistics = (props) => {
@@ -36,12 +45,14 @@ const Statistics = (props) => {
   return (
     <div>
   <h1>Statistics</h1>
+  <table>
       <StatisticLine text="Good" value={props.good} />
       <StatisticLine text="Neutral" value={props.neutral} />
       <StatisticLine text="Bad" value={props.bad} />
       <StatisticLine text="Total" value={totalValue} />
       <StatisticLine text="Average" value={averageValue} />
       <StatisticLine text="Positive" value={positivePerc} />
+  </table>
 </div>)}
 
 const App = () => {
