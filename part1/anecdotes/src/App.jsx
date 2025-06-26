@@ -21,6 +21,7 @@ const VoteDisplay = (props) => {
 
 
 
+
 const App = () => {   
   const [selected, setSelected] = useState(0)
   const setNewSelected = (selectedValue) => {
@@ -54,9 +55,13 @@ const App = () => {
   }
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <AnecdoteDisplay selected={selected} anecdotes={anecdotes}/>
       <VoteDisplay votes={votes} anecNumber={selected}/>
       <Button onClick={ () => handleVote(votes)} text='vote' /><Button onClick={ () => setNewSelected(selected)} text='next anecdote' />
+      <h1>Anecdote with most votes</h1>
+      <AnecdoteDisplay selected={votes.indexOf(Math.max(...votes))} anecdotes={anecdotes}/>
+      <VoteDisplay votes={votes} anecNumber={votes.indexOf(Math.max(...votes))}/>
     </div>
   )
 }
