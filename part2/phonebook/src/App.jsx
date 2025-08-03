@@ -2,10 +2,15 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' , number: '788-23123-213'}
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [showAll, setShowAll] = useState(true)
+  const [subString, setSubstring] = useState('')
     const addName = (event) => {
     event.preventDefault()
     const personObject = {
@@ -17,7 +22,9 @@ const App = () => {
     if (personArray.includes(personObject.name)) {
       alert(personObject.name + ' is already added to phonebook')
       setNewName('')
-      setNewNumber('')
+      setNewNumber('')[
+    { name: 'Arto Hellas' , number: '788-23123-213'}
+  ]
     } else {
     setPersons(persons.concat(personObject))
     setNewName('')
@@ -32,9 +39,20 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleFilter = (event) => {
+    setSubstring(event.target.value)
+  }
+  console.log(persons);
+  
+  const personsToShow = (subString === "")    ? persons    : persons.filter(person => person.name.toLowerCase().includes(subString.toLocaleLowerCase()))
   return (
     <div>
       <h2>Phonebook</h2>
+      <form>
+        <div>
+          Filter: <input value={subString} onChange={handleFilter} />
+        </div>
+      </form>
       <form onSubmit={addName}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
@@ -47,7 +65,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person,i) => <li key={i}>{person.name} {person.number}</li> 
+        {personsToShow.map((person,i) => <li key={i}>{person.name} {person.number}</li> 
         )}
       </ul>
     </div>
