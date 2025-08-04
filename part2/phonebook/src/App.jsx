@@ -1,5 +1,18 @@
 import { useState } from 'react'
 
+
+const Filter = ({ subString, handleFilterChange }) => {
+  return (
+
+      <form>
+        <div>
+          Filter: <input value={subString} onChange={handleFilterChange} />
+        </div>
+      </form>
+  )
+
+}
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -9,8 +22,12 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [showAll, setShowAll] = useState(true)
   const [subString, setSubstring] = useState('')
+
+  const handleFilter = (event) => {
+    setSubstring(event.target.value)
+  }
+  
     const addName = (event) => {
     event.preventDefault()
     const personObject = {
@@ -39,20 +56,16 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  const handleFilter = (event) => {
-    setSubstring(event.target.value)
-  }
+  const personsToShow = (subString === "")    ? persons    : persons.filter(person => person.name.toLowerCase().includes(subString.toLocaleLowerCase()))
+
+
+
   console.log(persons);
   
-  const personsToShow = (subString === "")    ? persons    : persons.filter(person => person.name.toLowerCase().includes(subString.toLocaleLowerCase()))
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
-        <div>
-          Filter: <input value={subString} onChange={handleFilter} />
-        </div>
-      </form>
+      <Filter subString={subString} handleFilterChange={handleFilter}/>
       <form onSubmit={addName}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
