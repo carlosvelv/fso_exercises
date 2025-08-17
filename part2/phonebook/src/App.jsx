@@ -36,11 +36,21 @@ const App = () => {
     // console.log(personObject)
     const personArray = persons.map(a => a.name)
     if (personArray.includes(personObject.name)) {
-      alert(personObject.name + ' is already added to phonebook')
+      alert(personObject.name + ' is already added to phonebook, replace the old number with a new one?')
+      const existingPerson = persons.find(p => p.name === personObject.name)
+      console.log(existingPerson)
+      console.log(personObject)
+      personService
+      .update(existingPerson.id,personObject)
+      .then(response => {const updatedPersons = persons.map(person => 
+          person.id === existingPerson.id ? response.data : person
+        );
+      setPersons(updatedPersons)
       setNewName('')
-      setNewNumber('')[
-    { name: 'Arto Hellas' , number: '788-23123-213'}
-  ]
+      setNewNumber('') 
+      })
+      setNewName('')
+      setNewNumber('')
     } else {
     personService
     .create(personObject)
